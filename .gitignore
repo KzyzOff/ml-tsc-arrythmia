@@ -1,0 +1,5 @@
+/.venv/
+/playground.ipynb
+/.env
+/data/
+/.idea/
