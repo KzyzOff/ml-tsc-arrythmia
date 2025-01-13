@@ -11,7 +11,7 @@ from external_tools.zheng_denoise.denoiser import NLM_1dDarbon
 
 load_dotenv()
 DATASET_PATH = os.getenv('DATASET_PATH')
-PREPROCESSED_DATASET_PATH = os.getenv('PREPROCESSED_DATASET_PATH')
+DENOISED_DATASET_PATH = os.getenv('DENOISED_DATASET_PATH')
 
 
 def process_record(filepath: str):
@@ -24,8 +24,8 @@ def process_record(filepath: str):
     filtered = leadII - baseline
     denoised_filtered = NLM_1dDarbon(filtered, 0.1, 5, 2)
 
-    if not os.path.exists(PREPROCESSED_DATASET_PATH + '/' + filepath):
-        savemat(PREPROCESSED_DATASET_PATH + '/' + filepath,
+    if not os.path.exists(DENOISED_DATASET_PATH + '/' + filepath):
+        savemat(DENOISED_DATASET_PATH + '/' + filepath,
                 {'leadII': denoised_filtered})
         print(f'File {filepath} done')
     else:
@@ -37,7 +37,7 @@ record_paths = []
 x = np.arange(5000)
 
 for rec_p in records:
-    os.makedirs(PREPROCESSED_DATASET_PATH + '/' + rec_p, exist_ok=True)
+    os.makedirs(DENOISED_DATASET_PATH + '/' + rec_p, exist_ok=True)
 
     for filename in os.listdir(DATASET_PATH + '/' + rec_p):
         record_paths.append(rec_p + filename)
