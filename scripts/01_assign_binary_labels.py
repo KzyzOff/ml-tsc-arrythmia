@@ -1,8 +1,7 @@
-import re
 import os
 from dotenv import load_dotenv
 
-from external_tools.utils import get_record_paths
+from utils import get_record_paths
 
 
 def assign_label(dx_str: str):
